@@ -37,6 +37,48 @@ python3 scripts/codex_cli.py
 - 계획: Codex에 `prompts/harness.md를 읽고 첫 작업을 설계해줘`라고 요청합니다.
 - 리뷰: Codex에 `prompts/review.md에 따라 변경 사항을 리뷰해줘`라고 요청합니다.
 
+### Harness 전용 명령
+
+저장소의 `.agents/skills/harness/`에 프로젝트 전용 스킬을 제공합니다.
+앱에서는 `/` 메뉴에서 `harness`를 선택하고, Codex CLI에서는 `$harness` 또는
+`/skills`에서 `harness`를 선택합니다. 목록에 보이지 않으면 프로젝트 세션을 다시 시작하세요.
+
+CLI용 슬래시 별칭은 `/prompts:harness`입니다. 한 번 등록한 뒤 새 CLI 세션에서 사용합니다.
+
+```bash
+mkdir -p ~/.codex/prompts
+# 같은 이름의 기존 명령이 있으면 덮어쓰지 않고 내용을 먼저 확인합니다.
+cp -n prompts/harness-command.md ~/.codex/prompts/harness.md
+```
+
+```text
+/prompts:harness
+/prompts:harness MVP 구현을 위한 첫 phase를 설계해줘
+/prompts:harness 0-mvp 실행해줘
+```
+
+Codex의 사용자 정의 슬래시 명령은 `/prompts:<이름>` 형식을 사용합니다.
+이 별칭은 스킬을 읽는 진입점이며, 실제 작업 절차는 프로젝트 스킬 한 곳에서 관리합니다.
+
+아래 예시는 Codex 입력창에 입력합니다.
+
+```text
+$harness
+$harness MVP 구현을 위한 첫 phase를 설계해줘
+$harness 0-mvp 실행해줘
+$harness 진행 현황 알려줘
+$harness 변경 사항 리뷰해줘
+```
+
+인자 없이 호출하면 현재 상태와 다음 할 일을 안내합니다. 계획은 기존
+`prompts/harness.md`, 실행은 `scripts/execute.py`, 리뷰는 `prompts/review.md`를 사용합니다.
+계획 승인과 훅 신뢰 절차도 그대로 적용합니다.
+
+앱의 스킬 슬래시 메뉴와 CLI의 호출 방식은
+[공식 슬래시 명령 문서](https://learn.chatgpt.com/docs/app/slash-commands)와
+[스킬 문서](https://learn.chatgpt.com/docs/build-skills)를 참고하세요.
+사용자 정의 프롬프트는 [기존 슬래시 별칭 호환용](https://learn.chatgpt.com/docs/custom-prompts)으로만 사용합니다.
+
 ## 초기화와 실행
 
 아래 스택과 AC는 하네스 자체를 검증하는 예시입니다. 제품을 만들기 전 프로젝트에 맞게 바꾸세요.

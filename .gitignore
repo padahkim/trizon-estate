@@ -1,16 +1,23 @@
-# Node
+# Node / Next.js / Test
 node_modules/
 .next/
 out/
+build/
+.vercel/
+coverage/
+test-results/
+playwright-report/
 next-env.d.ts
 tsconfig.tsbuildinfo
 
-# Python
+# Python / Env
 __pycache__/
 *.py[cod]
 .pytest_cache/
 .venv/
 .env
+.env.*
+!.env.example
 *.egg-info/
 
 # Phase execution outputs
