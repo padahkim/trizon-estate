@@ -1,0 +1,4 @@
+interface:
+  display_name: "harness"
+  short_description: "프로젝트 harness의 phase 계획·실행·현황·리뷰 진입점"
+  default_prompt: "$harness 현재 진행 상황을 확인하고 다음 할 일을 안내해줘."
