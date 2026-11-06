@@ -1,0 +1,29 @@
+{
+  "description": "프로젝트 공통 가드: 위험 명령 차단과 구현 편집 전 테스트 파일 확인",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^Bash$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$(git rev-parse --show-toplevel)/scripts/guard.py\"",
+            "timeout": 10,
+            "statusMessage": "위험 명령 검사"
+          }
+        ]
+      },
+      {
+        "matcher": "^(Edit|Write|apply_patch)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$(git rev-parse --show-toplevel)/scripts/tdd_guard.py\"",
+            "timeout": 10,
+            "statusMessage": "TDD 가드 검사"
+          }
+        ]
+      }
+    ]
+  }
+}
